@@ -1,28 +1,31 @@
-let stack1 = new Array;
-let stack2 = new Array;
-
 class Queue {
+  constructor() {
+    this.stack1 = new Array;
+    this.stack2 = new Array;
+  }
   
 	queueing(a) {
-    stack1.push(a)
+    this.stack1.push(a)
     return `Added ${a} to queue`
   }
   peek() {
-    return stack1.length + stack2.length
+    return this.stack1.length + this.stack2.length
   }
   dequeueing() {
+    let numberToDequeue;
     let size = this.peek()
     if (size === 0) { throw new Error('No more items left to dequeue')}
     for (let i = 0; i < size -1; i++) {
-      stack2.push(stack1.pop())
+      this.stack2.push(this.stack1.pop())
     }
-    stack1.pop()
+    numberToDequeue = this.stack1[0]
+    this.stack1.pop()
     for (let y = 0; y < size-1; y++) {
-      stack1.push(stack2.pop())
+      this.stack1.push(this.stack2.pop())
     }
-    stack2.pop()
-    return `dequeing`
-
+    this.stack2.pop()
+    return `Dequeing ${numberToDequeue}`
+    
   }
 }
 
@@ -31,11 +34,10 @@ console.log(queue.queueing(1));
 console.log(queue.queueing(2));
 console.log(queue.queueing(3));
 console.log(queue.queueing(4));
-console.log('stack1', stack1)
-console.log('stack2', stack2)
+console.log(queue.peek());
 console.log(queue.dequeueing());
 console.log(queue.dequeueing());
+console.log(queue.peek());
 console.log(queue.dequeueing());
 console.log(queue.dequeueing());
-console.log('stack1', stack1)
-console.log('stack2', stack2)
+console.log(queue.peek());
